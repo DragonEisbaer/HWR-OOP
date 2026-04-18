@@ -10,7 +10,7 @@ public class EinAusgabe {
      * @return die vom Benutzer eingegebene Ganzzahl
      */
     public static int eingabeGanzzahl(String aufforderung){
-        System.out.println(aufforderung);
+        System.out.print(aufforderung);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
