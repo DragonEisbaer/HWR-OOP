@@ -10,6 +10,8 @@ Note 5: 1 mal
 */
 public class Notenspiegel {
 
+	static boolean empty = true;
+
 	/**
 	 * Erstellung eines Notenspiegels
 	 * @param args wird nicht verwendet
@@ -17,9 +19,9 @@ public class Notenspiegel {
 	public static void main(String[] args) {
 	    int eingabe = 0;
 
-		//anzahlNoten[0] = ?
-		//anzahlNoten[1] = 1
-		//anzahlNoten[2] = 2
+		//anzahlNoten[0] = 1
+		//anzahlNoten[1] = 2
+		//anzahlNoten[2] = 3
 	    int[] anzahlNoten = new int[5];
 
 	    do {
@@ -28,13 +30,17 @@ public class Notenspiegel {
 				System.out.println(eingabe + " ist keine mögliche Eingabe (1-5)!");
 			}else if (eingabe > 0) {
 				anzahlNoten[eingabe-1]++;
+				empty = false;
 			}
 	    } while (eingabe > 0);
 
-
-	    System.out.println();
-	    notenspiegel(anzahlNoten);
-		System.out.println("Durchschnitt: " + durchschnitt(anzahlNoten));
+		if (!empty) {
+			System.out.println();
+			notenspiegel(anzahlNoten);
+			durchschnitt(anzahlNoten);
+		}else {
+			System.out.println("Es wurden keine Noten eingegeben.");
+		}
 	}
 
 	/**
@@ -51,7 +57,7 @@ public class Notenspiegel {
 	 *
 	 * @param anzahlNoten ein int-Array mit den Häufigkeiten für die Noten 1..5
 	 */
-	public static void notenspiegel(int[] anzahlNoten){
+	public static void notenspiegel(int[] anzahlNoten) {
 		System.out.println("1: " + anzahlNoten[0]);
 		System.out.println("2: " + anzahlNoten[1]);
 		System.out.println("3: " + anzahlNoten[2]);
@@ -71,17 +77,12 @@ public class Notenspiegel {
 	 * Algorithmus: Für jede Note i wird der Beitrag (Anzahl * Note) aufsummiert
 	 * und anschließend durch die Gesamtanzahl der Noten geteilt.
 	 *
-	 * Rückgabewert: Der Durchschnitt als double (z.B. 2.3).
-	 * Wenn keine Noten vorhanden sind (Gesamtanzahl == 0) ergibt die aktuelle
-	 * Implementierung eine Division 0/0 und liefert Double.NaN.
-	 *
 	 * Mögliche Fehler/Exceptions: Wird ein null-Array übergeben oder ist das Array
 	 * kürzer als 5, kann eine ArrayIndexOutOfBoundsException auftreten.
 	 *
 	 * @param noten ein int-Array mit den Häufigkeiten für die Noten 1..5
-	 * @return der Durchschnittswert über alle vorhandenen Noten als double
 	 */
-	public static double durchschnitt(int[] noten) {
+	public static void durchschnitt(int[] noten) {
 		double gesamt = 0;
 		double anzahlAllerNoten = 0;
 		for (int i = 0; i < noten.length; i++) {
@@ -92,7 +93,7 @@ public class Notenspiegel {
 				gesamt += noten[i] * (i + 1);
 			}
 		}
-		return gesamt/anzahlAllerNoten;
+		System.out.println("Durchschnitt: " + gesamt/anzahlAllerNoten);
 	}
 
 }

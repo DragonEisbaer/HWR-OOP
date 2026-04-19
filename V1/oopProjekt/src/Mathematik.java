@@ -39,4 +39,46 @@ public class Mathematik {
         }
         return root;
     }
+
+    /**
+     * Ermittelt alle Primzahlen kleiner oder gleich {@code n}.
+     * <p>
+     * Die Methode verwendet ein einfaches Siebverfahren und gibt die gefundenen
+     * Primzahlen in einem neuen Array zurück.
+     *
+     * @param n die obere Grenze für die Primzahlsuche
+     * @return ein Array mit allen Primzahlen von {@code 2} bis {@code n}
+     */
+    public static int[] kleinerePrimzahlen(int n) {
+        int[] zahlen = new int[n+1];
+        for (int i = 2; i <= n; i++) {
+            zahlen[i] = i;
+        }
+
+        for (int p = 2; p <= n; p++) {
+            if (zahlen[p] != 0) {
+                for (int j = p + p; j <= n; j += p) {
+                    zahlen[j] = 0;
+                }
+            }
+        }
+
+        int anzahl = 0;
+        for (int i = 2; i <= n; i++) {
+            if (zahlen[i] != 0) {
+                anzahl++;
+            }
+        }
+
+        int[] primzahlen = new int[anzahl];
+        int index = 0;
+
+        for (int i = 2; i <= n; i++) {
+            if (zahlen[i] != 0) {
+                primzahlen[index] = zahlen[i];
+                index++;
+            }
+        }
+    return primzahlen;
+    }
 }
