@@ -1,8 +1,12 @@
+package nebensachen;
+
+import nuetzliches.EinAusgabe;
+
 import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Die Klasse {@code ArraySpiele} demonstriert einfache Operationen mit einem Zahlenarray.
+ * Die Klasse {@code nebensachen.ArraySpiele} demonstriert einfache Operationen mit einem Zahlenarray.
  * <p>
  * Dabei werden Werte eingefüllt, zufällige Zahlen erzeugt, das Array sortiert
  * und anschließend eine binäre Suche durchgeführt.

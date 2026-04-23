@@ -1,3 +1,7 @@
+package oopMains;
+
+import nuetzliches.EinAusgabe;
+
 /**
 Programm zur Erstellung  eines Notenspiegels an der Hochschule
 Der Dozent gibt die erzielten Noten ein, also z.B. 1-1-2-1-5-3-1-4-3,

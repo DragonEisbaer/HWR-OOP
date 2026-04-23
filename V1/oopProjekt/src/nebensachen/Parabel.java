@@ -1,5 +1,9 @@
+package nebensachen;
+
+import nuetzliches.EinAusgabe;
+
 /**
- * Die Klasse {@code Parabel} zeichnet eine einfache textbasierte Parabel in der Konsole.
+ * Die Klasse {@code nebensachen.Parabel} zeichnet eine einfache textbasierte nebensachen.Parabel in der Konsole.
  * <p>
  * Der Benutzer gibt einen Bereich {@code x} ein. Anschließend werden für alle Werte
  * von {@code -x} bis {@code x} die quadrierten Werte berechnet und als Einrückung
@@ -10,14 +14,14 @@ public class Parabel {
     /**
      * Startet das Programm.
      * <p>
-     * Der Benutzer gibt einen Bereich für die Parabel ein. Danach wird die Parabel
+     * Der Benutzer gibt einen Bereich für die nebensachen.Parabel ein. Danach wird die nebensachen.Parabel
      * zeilenweise in der Konsole ausgegeben.
      *
      * @param args Kommandozeilenargumente, werden nicht verwendet
      */
     public static void main(String[] args) {
 
-        int x = EinAusgabe.eingabeGanzzahl("Gebe einen Bereich ein für die Parabel: ");
+        int x = EinAusgabe.eingabeGanzzahl("Gebe einen Bereich ein für die nebensachen.Parabel: ");
         zeichneParabel(x);
     }
 
@@ -41,9 +45,9 @@ public class Parabel {
     }
 
     /**
-     * Zeichnet eine textbasierte Parabel für den Bereich von {@code -x} bis {@code x}.
+     * Zeichnet eine textbasierte nebensachen.Parabel für den Bereich von {@code -x} bis {@code x}.
      *
-     * @param x der Bereich der Parabel
+     * @param x der Bereich der nebensachen.Parabel
      */
 
     public static void zeichneParabel(int x) {

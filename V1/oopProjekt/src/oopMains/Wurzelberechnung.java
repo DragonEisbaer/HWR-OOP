@@ -1,8 +1,13 @@
+package oopMains;
+
+import nuetzliches.EinAusgabe;
+import nuetzliches.Mathematik;
+
 /**
  * Konsolenprogramm zur Berechnung einer n-ten Wurzel.
  * <p>
  * Das Programm liest einen Radikanden sowie einen Exponenten ein
- * und gibt anschließend das Ergebnis der Wurzelberechnung aus.
+ * und gibt anschließend das Ergebnis der oopMains.Wurzelberechnung aus.
  * </p>
  */
 public class Wurzelberechnung {

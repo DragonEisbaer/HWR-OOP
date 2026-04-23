@@ -1,3 +1,5 @@
+package nuetzliches;
+
 /**
  * Stellt mathematische Hilfsmethoden bereit.
  */

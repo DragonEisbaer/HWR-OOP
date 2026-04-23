@@ -1,3 +1,8 @@
+package nebensachen;
+
+import nuetzliches.EinAusgabe;
+import nuetzliches.Mathematik;
+
 import java.util.Arrays;
 
 public class SiebDesEratosthenes {

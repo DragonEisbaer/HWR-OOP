@@ -1,3 +1,7 @@
+package oopMains;
+
+import nuetzliches.EinAusgabe;
+
 import java.util.Scanner;
 
 /**
