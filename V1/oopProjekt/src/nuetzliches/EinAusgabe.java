@@ -43,6 +43,22 @@ public class EinAusgabe {
     }
 
     /**
+     * Liest eine Kommazahl von der Konsole ein.
+     * <p>
+     * Vor der Eingabe wird der übergebene Text als Aufforderung ausgegeben.
+     * Der Rückgabewert ist größer als {@code 0}.
+     *
+     * @param aufforderung Text, der dem Benutzer vor der Eingabe angezeigt wird
+     * @return die eingegebene Kommazahl
+     */
+    public static double eingabeKommazahl(String aufforderung) {
+        System.out.println(aufforderung);
+        Scanner scanner = new Scanner(System.in);
+        scanner.useDelimiter(System.lineSeparator() + "|\n");
+        return scanner.nextDouble();
+    }
+
+    /**
      * Liest eine {@link BigInteger}-Zahl von der Konsole ein.
      * <p>
      * Vor der Eingabe wird der übergebene Text als Aufforderung ausgegeben.

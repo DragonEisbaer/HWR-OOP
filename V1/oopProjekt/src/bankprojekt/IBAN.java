@@ -1,6 +1,7 @@
 package bankprojekt;
 
 import java.math.BigInteger;
+import java.text.ParseException;
 import java.util.Scanner;
 
 /**
@@ -43,6 +44,21 @@ public class IBAN {
 		BigInteger y = new BigInteger(x).mod(new BigInteger("97"));
 		BigInteger pruefziffer = new BigInteger("98").subtract(y);
         return String.format("DE%02d%08d%010d", pruefziffer, blz, kontonummer);
+	}
+
+	public static boolean istIbanGueltig(String iban) {
+		if (iban == null || iban.length() != 22) {
+			return false;
+		}
+		String blz = iban.substring(4, 12);
+		String kontonummer = iban.substring(12, 22);
+		String neugebildeteiban;
+		try {
+			neugebildeteiban = ibanBerechnen(Long.parseLong(blz), Long.parseLong(kontonummer));
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return iban.equals(neugebildeteiban);
 	}
 
 }
