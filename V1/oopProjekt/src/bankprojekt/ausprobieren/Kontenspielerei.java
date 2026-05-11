@@ -2,6 +2,7 @@ package bankprojekt.ausprobieren;
 
 import bankprojekt.Konto;
 import happylittleaccidents.GesperrtException;
+import mathematik.Bruch;
 
 /**
  * Testprogramm für die Klasse Konto

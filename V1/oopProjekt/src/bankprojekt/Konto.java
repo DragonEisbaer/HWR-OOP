@@ -13,7 +13,7 @@ import java.text.NumberFormat;
  */
 public class Konto {
 
-	public static int anzahlBisherErstellterKonten = 0;
+	private static int anzahlBisherErstellterKonten = 0;
 
 	/**
 	 * die Kontonummer
@@ -178,6 +178,10 @@ public class Konto {
 		System.out.println(hier.nummer + ": " + hier.inhaber);
 	}
 
+	/**
+	 * formatiert den Kontostand in die jeweilige Währung
+	 * @return Formatierten Kontostand
+	 */
 	public String getKontostandFormatiert() {
 		return NumberFormat.getCurrencyInstance().format(this.kontostand);
 	}
