@@ -13,7 +13,7 @@ import java.text.NumberFormat;
  */
 public class Konto {
 
-	private static int anzahlBisherErstellterKonten = 0;
+	private static long anzahlBisherErstellterKonten = 0;
 
 	/**
 	 * die Kontonummer
@@ -32,17 +32,13 @@ public class Konto {
 	/**
 	 * Besitzer des Kontos
 	 */
-	private String inhaber;
-	
+	private Kunde inhaber;
+
 	/**
-	 * erstellt ein leeres Konto
+	 * erstellt ein leeres Konto für Max Mustermann
 	 */
 	public Konto() {
-		this.nummer = anzahlBisherErstellterKonten;
-		this.kontostand = 0;
-		this.gesperrt = false;
-		this.inhaber = "Minnie Mouse";
-		anzahlBisherErstellterKonten++;
+		this(Kunde.MUSTERMANN, 0);
 	}
 
 	/**
@@ -53,7 +49,7 @@ public class Konto {
 	 * @throws IllegalArgumentException wenn inhaber null oder leer
 	 * 									oder anfangsstand negativ
 	 */
-	public Konto(String inhaber, double anfangsstand)
+	public Konto(Kunde inhaber, double anfangsstand)
 	{
 		if(inhaber == null || inhaber.equals(""))
 		{	
@@ -88,7 +84,7 @@ public class Konto {
 	 * inhaber
 	 * @return inhaber
 	 */
-	public String getInhaber() {
+	public Kunde getInhaber() {
 		return inhaber;
 	}
 
@@ -98,12 +94,12 @@ public class Konto {
 	 * @throws IllegalArgumentException wenn inhaber null oder leer ist
 	 * @throws GesperrtException wenn das Konto gesperrt ist
 	 */
-	public void setInhaber(String inhaber) throws GesperrtException {
+	public void setInhaber(Kunde inhaber) throws GesperrtException {
 
 		if (this.isGesperrt()) {
-			throw new GesperrtException("Das Konto ist gesperrt. Inhaber kann nicht geändert werden.");
+			throw new GesperrtException();
 		}
-		if(inhaber == null || inhaber.equals(""))
+		if(inhaber == null || inhaber.getName().isEmpty())
 			throw new IllegalArgumentException();
 		this.inhaber = inhaber;
 	}
@@ -158,13 +154,21 @@ public class Konto {
 	public boolean abheben(double betrag) throws GesperrtException
 	{
 		if (this.isGesperrt()) {
-			throw new GesperrtException("Das Konto ist gesperrt. Abhebung nicht möglich.");
+			throw new GesperrtException(this.nummer);
 		}
 		if(betrag <= this.kontostand) {
 			this.kontostand = this.kontostand - betrag;
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * setzt kontostand neu
+	 * @param kontostand neuer Wert für kontostand
+	 */
+	protected void setKontostand(double kontostand) {
+		this.kontostand = kontostand;
 	}
 
 	

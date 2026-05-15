@@ -1,8 +1,10 @@
 package bankprojekt.ausprobieren;
 
+import java.time.LocalDate;
+
 import bankprojekt.Konto;
+import bankprojekt.Kunde;
 import happylittleaccidents.GesperrtException;
-import mathematik.Bruch;
 
 /**
  * Testprogramm für die Klasse Konto
@@ -22,17 +24,24 @@ public class Kontenspielerei {
 		System.out.println("Vor der Einzahlung: " + k.getKontostand());
 		k.einzahlen(100);
 		System.out.println("Nach der Einzahlung: " + k.getKontostand());
-		Konto neu = new Konto("Maxi", 11000);
-		Konto neu1 = new Konto("basti", 0);
-		System.out.println(k.getNummer());
-		System.out.println(neu.getNummer());
-		System.out.println(neu1.getNummer());
-		System.out.println("Knotostand: " + neu1.getKontostandFormatiert());
-		neu.setGesperrt(true);
+		Kunde ich = new Kunde("Doro", "Hubrich", "zuhause", LocalDate.of(1976, 7, 13));
+		Konto zwei = new Konto(ich, 1000);
+		Konto drei = new Konto(ich, 500);
+		System.out.println(k.getInhaber() + ": " + k.getNummer());
+		System.out.println(zwei.getInhaber() + ": " + zwei.getNummer());
+		System.out.println(drei.getInhaber() + ": " + drei.getNummer());
+		drei.setGesperrt(true);
+		boolean hatGeklappt;
 		try {
-			neu.abheben(1);
-		}catch (GesperrtException e) {
-			System.out.println("Fehler: " + e.getMessage());
+			hatGeklappt = drei.abheben(200);
+		} catch (GesperrtException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			zwei.einzahlen(-100);
+		}
+		catch (IllegalArgumentException e) {
+			System.out.println("Falscher Betrag!");
 		}
 	}
 

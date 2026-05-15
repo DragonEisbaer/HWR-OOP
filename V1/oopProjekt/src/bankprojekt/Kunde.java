@@ -2,6 +2,10 @@ package bankprojekt;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 
 /**
  * Repräsentiert einen Bankkunden mit Name, Adresse und Geburtstag.
@@ -26,10 +30,12 @@ public class Kunde {
      * Erzeugt einen Beispielkunden mit vordefinierten Standardwerten.
      */
     public Kunde() {
-        this.vorname = "Max";
-        this.nachname = "Mustermann";
-        this.adresse = "Kieler Straße 21";
-        this.geburtstag = LocalDate.of(1990, 1, 1);
+        this("Max", "Mustermann", "manfredstr. 21", LocalDate.of(1990, 1, 1));
+    }
+
+    public Kunde(String vorname, String nachname, String adresse, String geburtstag) {
+        this((vorname), (nachname), (adresse), (LocalDate.parse(geburtstag,
+					DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.GERMAN))));
     }
 
     /**
@@ -56,10 +62,15 @@ public class Kunde {
             throw new IllegalArgumentException("Geburtstag darf nicht null sein.");
         }
 
+        this.geburtstag = geburtstag;
+
+        if (getAlter() < 18) {
+            throw new IllegalArgumentException("Kunde muss mindestens 18 Jahre alt sein.");
+        }
+
         this.vorname = vorname;
         this.nachname = nachname;
         this.adresse = adresse;
-        this.geburtstag = geburtstag;
     }
 
     /**
@@ -106,5 +117,29 @@ public class Kunde {
     public int getAlter() {
         LocalDate today = LocalDate.now();
         return Period.between(geburtstag, today).getYears();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s, %s: wohnhaft in %s, %d Jahre alt (geboren am: %s)", nachname, vorname, adresse, getAlter(), geburtstag.toString());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Kunde)) {
+            return false;
+        }
+
+        Kunde other = (Kunde) obj;
+
+        return this.vorname.equals(other.vorname) && this.nachname.equals(other.nachname) && this.geburtstag.equals(other.geburtstag);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.vorname.hashCode() + this.nachname.hashCode() + this.geburtstag.hashCode();
     }
 }

@@ -21,7 +21,7 @@ public class Kundenspielerei {
 	 */
 	public static void main(String[] args) {
 
-		Kunde brian = new Kunde("Brian", "Sturmhoevel", "Kieler Straße 21", LocalDate.of(2007, 6, 18));
+		Kunde brian = new Kunde("Brian", "Sturmhoevel", "Manfredstr. 21", LocalDate.of(2007, 6, 18));
 
 		@SuppressWarnings("resource")
 		Scanner tastatur = new Scanner(System.in);
@@ -38,12 +38,17 @@ public class Kundenspielerei {
 		try {
 			geburtstag = LocalDate.parse(geburtstagEingabe,
 					DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.GERMAN));
-		}catch (DateTimeParseException e) {
+		} catch (DateTimeParseException e) {
 			System.out.println("Ungültiges Datum. Bitte im Format TT.MM.JJJJ eingeben.");
 			return;
 		}
-
-		Kunde eingabeKunde = new Kunde(vorname, nachname, adresse, geburtstag);
+		Kunde eingabeKunde;
+		try {
+			eingabeKunde = new Kunde(vorname, nachname, adresse, geburtstag);
+		}catch (IllegalArgumentException e) {
+			System.out.println("Fehler bei der Kundenerstellung: " + e.getMessage());
+			return;
+		}
 
 		System.out.println("Der Kunde heißt: " + eingabeKunde.getName());
 		System.out.println("Die Adresse lautet: " + eingabeKunde.getAdresse());
@@ -53,6 +58,9 @@ public class Kundenspielerei {
 		System.out.println("Max Mustermann name ist: " + Kunde.MUSTERMANN.getName());
 		System.out.println("Max Mustermann Adresse lautet: " + Kunde.MUSTERMANN.getAdresse());
 		System.out.println("Max Mustermann Alter ist: " + Kunde.MUSTERMANN.getAlter());
-	}
 
+		Kunde mensch1 = new Kunde("Max", "Mustermann", "Musterstr. 1", "19.09.1999");
+		Kunde mensch2 = new Kunde("Max", "Mustermann", "Musterstr. 1", LocalDate.of(2008, 7, 8));
+		System.out.println(mensch1.equals(mensch2));
+	}
 }
